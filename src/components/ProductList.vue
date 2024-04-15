@@ -44,12 +44,15 @@ export default {
       // Implement your editBiscuit logic here
       console.log('Editing', biscuit.name);
     },
-    deleteBiscuit(biscuit) {
-      // Implement your deleteBiscuit logic here
-      console.log('Deleting', biscuit.name);
+    deleteBiscuit(index) {
+      const confirmDelete = window.confirm('Are you sure you want to delete this product?');
+      if (confirmDelete) {
+        this.biscuit.splice(index, 1);
+      }
     }
   }
 };
+
 </script>
 
   
