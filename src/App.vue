@@ -1,27 +1,30 @@
 <template>
-  <div id="app">
-   
-    <BiscuitPage />
-  </div>
+   <nav class="navigation">
+      <router-link to="/" class="nav-home">Home |</router-link>
+      <router-link to="/productList" class="nav-task"> Product List</router-link> 
+    </nav>
+  <router-view/>
 </template>
 
 <script>
-import BiscuitPage from './components/BiscuitPage.vue';
-
 export default {
   name: 'App',
-  components: {
-    BiscuitPage
+  data() {
+    return {
+    };
+  },
+  methods: {
+
   }
 };
 </script>
 
 <style>
-#app {
-  font-family: Arial, sans-serif;
-  margin: 20px;
+nav{
+  text-align: center
 }
-.h1{
-  text-align: center;
+#app {
+  font-family: Arial;
+  margin: 20px;
 }
 </style>

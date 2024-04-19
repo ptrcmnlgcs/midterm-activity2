@@ -11,13 +11,13 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(biscuit, index) in biscuits" :key="index">
-          <td>{{ biscuit.name }}</td>
-          <td>{{ biscuit.description }}</td>
-          <td>${{ biscuit.price }}</td>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
           <td>
-            <button @click="editBiscuit(biscuit)">Edit</button>
-            <button @click="deleteBiscuit(biscuit)">Delete</button>
+            <button>Edit</button>
+            <button>Delete</button>
             <!-- <button @click="addToCart(biscuit)">Add </button> Example action button -->
           </td>
         </tr>
@@ -27,31 +27,6 @@
 </template>
 
 <script>
-export default {
-  name: 'ProductList',
-  props: {
-    biscuits: {
-      type: Array,
-      required: true
-    }
-  },
-  methods: {
-    addToCart(biscuit) {
-      // Implement your addToCart logic here
-      console.log('Added', biscuit.name, 'to cart');
-    },
-    editBiscuit(biscuit) {
-      // Implement your editBiscuit logic here
-      console.log('Editing', biscuit.name);
-    },
-    deleteBiscuit(index) {
-      const confirmDelete = window.confirm('Are you sure you want to delete this product?');
-      if (confirmDelete) {
-        this.biscuit.splice(index, 1);
-      }
-    }
-  }
-};
 
 </script>
 
