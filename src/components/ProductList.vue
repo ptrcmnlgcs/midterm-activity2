@@ -7,18 +7,17 @@
           <th>Name</th>
           <th>Description</th>
           <th>Price</th>
-          <th>Action</th> <!-- Added action column -->
+          <th>Action</th> 
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
+        <tr v-for="product in products" :key="product.name">
+          <td>{{ product.name }}</td>
+          <td>{{ product.description }}</td>
+          <td>{{ product.price }}</td>
           <td>
-            <button>Edit</button>
-            <button>Delete</button>
-            <!-- <button @click="addToCart(biscuit)">Add </button> Example action button -->
+            <button @click="editProduct(product)">Edit</button>
+            <button @click="confirmDelete(product)">Delete</button>
           </td>
         </tr>
       </tbody>
@@ -27,50 +26,67 @@
 </template>
 
 <script>
-
+export default {
+  data() {
+    return {
+      products: [
+        { name: "Product A", description: "Description A", price: 10 },
+        { name: "Product B", description: "Description B", price: 8 },
+        { name: "Product C", description: "Description C", price: 12 }
+      ],
+      deletingIndex: null
+    };
+  },
+  methods: {
+    // eslint-disable-next-line no-unused-vars
+    editProduct(product) {
+    },
+    confirmDelete(product) {
+      if (confirm("Are you sure you want to delete this product?")) {
+        this.deleteProduct(product);
+      }
+    },
+    deleteProduct(product) {
+      const index = this.products.indexOf(product);
+      this.deletingIndex = index;
+      setTimeout(() => {
+        this.products.splice(index, 1);
+        this.deletingIndex = null;
+      }, 500);
+    }
+  }
+};
 </script>
 
-  
-  <style scoped>
-  .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Center items horizontally */
-    justify-content: center; /* Center items vertically */
-  }
-  
-  h1 {
-    color: #333;
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-  .product-table {
+<style scoped>
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center;
+}
+
+h1 {
+  color: #333;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.product-table {
   width: 100%;
-  margin: 0 auto; /* Center the table horizontally */
   border-collapse: collapse;
 }
 
-.biscuit-page {
-  max-width: 800px;
-  margin: 20px auto; /* Center the page horizontally and add equal spacing on top and bottom */
-  padding: 20px;
+.product-table th,
+.product-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
 }
-  .product-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  .product-table th,
-  .product-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-  }
-  
-  .product-table th {
-    background-color: #f2f2f2;
-    text-align: left;
-  }
 
+.product-table th {
+  background-color: #f2f2f2;
+  text-align: left;
+}
 
 .product-table button {
   padding: 8px 16px; 
@@ -80,11 +96,13 @@
   margin-right: 8px; 
 }
 
-/* Style for the last button in the row to remove right margin */
 .product-table button:last-child {
   margin-right: 0;
 }
 
-
-  </style>
-  
+/* Animation */
+.product-table tbody tr.deleting {
+  transition: opacity 0.5s;
+  opacity: 0;
+}
+</style>
